@@ -1,0 +1,8 @@
+.env
+__pycache__
+app/__pycache__
+app/static/__pycache__
+app/templates/__pycache__
+instance/__pycache__
+tasks.md
+venv/

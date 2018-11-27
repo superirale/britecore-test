@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div class="row">
+        <div class="actions">
+            <a href="/features/add" class="btn btn-sm btn-success">Add feature</a>
+        </div>
+        <div class="">
+            <div class="alert alert-danger" data-bind="text:StatusMessage"></div>
+        </div>
+        <div class="features" data-bind="foreach: FeaturesList">
+            <div class="feature">
+                <span data-bind="text:Title"></span>
+                <span data-bind="text:Client"></span>
+                <a href="#" data-bind="click: $parent.removeFeatureRequest">Remove</a>
+            </div>
+        </div>
+    </div>
+     <script>
+        function featuresViewModel () {
+            var self = this;
+            self.FeaturesList = ko.observableArray([]);
+            self.StatusMessage = ko.observable("deleted");
+
+            self.GetFeatures = function() {
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: 'api/feature-requests',
+                    success: function (data) {
+                        self.FeaturesList($.map(data, function (feature_request) {
+                           return new featureDetailViewModel(feature_request);
+                      }));
+                    }
+                  });
+            }
+
+            self.GetFeatures();
+
+            self.removeFeatureRequest = function () {
+                // self.FeaturesList.remove(this);
+
+                $.ajax({
+                    type: 'DELETE',
+                    dataType: "text/plain",
+                    url: 'api/feature-requests/' + this.Id(),
+                    success: function (data, status) {
+                        if(status == '204') {
+                            self.GetFeatures(this)
+                        }
+                    }
+                })
+
+            }
+        }
+
+        function featureDetailViewModel(data) {
+            var self = this;
+            self.Id = ko.observable(data.id);
+            self.Title = ko.observable(data.title);
+            self.Client = ko.observable(data.client);
+        }
+        ko.applyBindings(new featuresViewModel());
+
+      </script>
+
+{% endblock %}
