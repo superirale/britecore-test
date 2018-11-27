@@ -5,4 +5,4 @@ app/static/__pycache__
 app/templates/__pycache__
 instance/__pycache__
 tasks.md
-venv/
+britecore/

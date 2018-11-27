@@ -6,9 +6,11 @@ from app.models import Client, FeatureRequest, ProductionArea
 def home():
     return render_template('index.html')
 
-@app.route('/create')
+@app.route('/features/create')
 def create():
-    return render_template('create.html')
+    production_areas = ProductionArea.query.all()
+    clients = Client.query.all()
+    return render_template('create.html', production_areas=production_areas, clients=clients)
 
 #api endpoints
 @app.route('/api/clients', methods=['GET','POST'])

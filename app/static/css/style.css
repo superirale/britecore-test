@@ -1,8 +1,30 @@
-
+body {
+    background: #f2f2f2;
+}
+.actions {
+    margin-bottom: 20px;
+}
 .features {
-    margin: 50px auto;
+    margin: 70px auto;
+}
+.features-inner{
+ background: #fff;
+    padding: 20px;
+    border-radius: 10px;
 }
 
-.features > ul {
+.form-horizontal {
+    padding: 50px 100px;
+    background: #fff;
+    border-radius: 10px;
+}
 
+.error {
+    color: red;
+}
+.alert {
+    padding: .75rem 1.5rem;
+}
+.alert>p{
+    margin: 0;
 }

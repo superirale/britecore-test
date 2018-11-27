@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+
+            <div class="features">
+                <div class="alert alert-success" id="addStatusMessage">
+                    <p>Successfully added feature request (ID: <span id="FqId"></span>)</p>
+                </div>
+                <form class="form-horizontal" id="addFeatureRequestForm">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input class="form-control" name="title" type="text" placeholder="Title" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" name="description" rows="5" placeholder="Description"required ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <input class="form-control" type="number" name="priority" min="1" placeholder="Priority" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Target Date</label>
+                        <input class="form-control date-picker" type="text" name="target_date" placeholder="Target Date" required />
+                    </div>
+                    <div class="form-group">
+                       <label>
+                           <input class="form-input" type="checkbox" id="showClientInbut"> Add a new client
+                       </label>
+                    </div>
+                    <div class="form-group" id="addClient">
+                        <label>Client</label>
+                        <input class="form-control" type="text" name="client" placeholder="Client name" required/>
+                    </div>
+                    <div class="form-group" id="showClient">
+                        <label>Client</label>
+                        <select class="form-control" name="client_id" required>
+                            <option value="">Select Client</option>
+                            {% for client in clients %}
+                                <option value="{{client.id}}">{{client.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Production area</label>
+                        <select class="form-control" name="production_area_id" required>
+                            <option value="">Select production area</option>
+                            {% for item in production_areas %}
+                                <option value="{{item.id}}">{{item.name}}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success">Add </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+
+        $(document).ready(function () {
+            //initialize libraries
+            var form = $( "#addFeatureRequestForm" )
+            form.validate()
+
+            form.submit(function(e) {
+                e.preventDefault();
+                if(form.valid()) {
+                    var formData = $('form').serialize();
+
+                    $("#addFeatureRequestForm :input").prop("disabled", true);
+                    $.ajax({
+                        type : 'POST',
+                        url : '/api/feature-requests',
+                        data  : formData,
+                        dataType : 'json',
+                        encode : true,
+                        success : function (data) {
+                            $("#addFeatureRequestForm :input").prop("disabled", false);
+                            $("#addFeatureRequestForm :input").val("")
+
+                            $("#FqId").text(data.id);
+                            $("#addStatusMessage").show();
+                            console.log(data)
+                        }
+                    })
+                }
+            })
+
+
+            $('.date-picker').datepicker({
+                format: 'yyyy-mm-dd',
+                startDate: '1d'
+            });
+
+            // form interactions
+            $("#addClient").hide();
+            $("#addProductArea").hide();
+            $("#addStatusMessage").hide();
+
+            $("#showClientInbut").change(function () {
+                var isAddClientChecked = $('#showClientInbut').is(':checked');
+
+               if (isAddClientChecked) {
+                    $("#showClient").hide();
+                    $("#addClient").show();
+               }
+               else {
+                    $("#showClient").show();
+                    $("#addClient").hide();
+               }
+            })
+
+            // $("#showProductionAreaInbut").change(function () {
+            //     var isAddPAChecked = $('#showProductionAreaInbut').is(':checked');
+
+            //    if (isAddPAChecked) {
+            //         $("#showProductArea").hide();
+            //         $("#addProductArea").show();
+            //    }
+            // })
+            //
+
+
+        })
+    </script>
+
+{% endblock %}
