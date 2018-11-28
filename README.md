@@ -35,7 +35,7 @@ From the commandline run the following commands
 * Initialize the virtual environment if it is not already initialized `. britecore/bin/activate`
 * then run `python app-test.py`
 
-![Running Test](https://github.com/superirale/bitecore-test/blob/master/app/static/images/tests.png?raw=true)
+![Running Test](https://raw.githubusercontent.com/superirale/britecore-test/master/app/static/images/tests.png)
 
 
 ## Sample Environment Variables
