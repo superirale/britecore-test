@@ -2,41 +2,50 @@
 [Description]
 
 ## Requirements
-* Python 3
+* Python 3.7.1
+* Flask 1.0.2
+* MySQL 5.7.14
+* JQuery 3.3.1
+
+#### Note: A complete list of dependencies can be found in requirements.txt
+
 
 ## Setup
-* clone Repository containing the project `git clone git@github.com:Percayso-VS/serviceLocator.git`
-* cd project `cd serviceLocator/src`
-* set up mongo database
-* Run `npm install` to install the needed node js packages.
-* Setup Environment variables (check the .env.sample to see the environment variables needed).
+* set up MYSQL database
+* clone Repository containing the project `git@github.com:superirale/britecore-test.git`
+* cd project `cd britecore-test`
+* create a `.env` file from a sample `.env.sample` file and update the necessary variables
+* create a virtual environment `python -m venv britecore`
+* Initialize the virtual environment `. britecore/bin/activate`
+* Run `pip install -r requirements.txt` to install the project dependencies.
 
 ## How to run
-Run this command to run the application `npm start` and you can also use [pm2](https://github.com/Unitech/pm2) or other production process manager for Node.js such as [Forever](https://github.com/foreverjs/forever) and [Strong PM](https://github.com/strongloop/strong-pm) (check their documentation for usage).
+Execute the following commands to run the app locally:
+
+* `export FLASK_ENV=development`
+* `export FLASK_APP="run.py"`
+*  `flask run`
+
+You can also run the app using [gunicorn](https://gunicorn.org/) and [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) (check their documentation for usage).
 
 ## Running the test
 From the commandline run the following commands
 
-* cd  `cd serviceLocator/src`
-* then run `npm test`
+* cd  `cd britecore-test`
+* Initialize the virtual environment if it is not already initialized `. britecore/bin/activate`
+* then run `python app-test.py`
 
-![Running Test](https://github.com/Percayso-VS/serviceLocator/blob/SERVICELOCATOR-10/documentation/screenshots/passing_tests.png?raw=true)
+![Running Test](https://github.com/superirale/bitecore-test/blob/master/app/static/images/tests.png?raw=true)
 
-## Documentation
 
 ## Sample Environment Variables
-* PORT = 3000
-* NODE_ENV = 'development'
-* DBURL='mongodb://localhost/development'
-* MAPBOX_CLIENT_KEY=pk.YBido7dF89FldmMwcmYxMzBwZXI3d3BoY3htIndd.JMtVIIHI5BF6_fyQP8A
-* ATM_API_URL=http://website.com/atmapi
+* APP_ENV=development
+* SECRET_KEY=ab4fed44eef
+* DEBUG=True
+* DATABASE_URI=mysql+mysqlconnector://root:dummy@localhost/britecore
+* DATABASE_URI_TEST=mysql+mysqlconnector://root:dummy@localhost/britecore_test
 
 #### Note: the values of the environment variables are dummy values.
-
-
-![Atmbankbot running with outputResult set to true](https://github.com/Percayso-VS/serviceLocator/blob/SERVICELOCATOR-10/documentation/screenshots/atmbankbot.jpg?raw=true)
-
-## Running the test
 
 
 
