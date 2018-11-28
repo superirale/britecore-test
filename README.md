@@ -51,7 +51,7 @@ From the commandline run the following commands
 
 * Navigate to the project directory `cd britecore-test`
 * Initialize the virtual environment if it is not already initialized `. britecore/bin/activate`
-* then run `python app-test.py`
+* Execute the following command `python app-test.py` to run the unit tests
 
 ![Running Test](https://raw.githubusercontent.com/superirale/britecore-test/master/app/static/images/tests.png)
 
