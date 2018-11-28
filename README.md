@@ -35,12 +35,12 @@ A "feature request" is a request for a new feature that will be added onto an ex
 ## How to run
 Execute the following commands to run the app locally:
 
-## Method 1
+### Method 1
 * `export FLASK_ENV="development"`
 * `export FLASK_APP="run.py"`
 *  `flask run`
 
-## Method 2
+### Method 2
 * you can simply use gunicorn to run the app `gunicorn --bind 0.0.0.0:5000 run:app`
 
 
