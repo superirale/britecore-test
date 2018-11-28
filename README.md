@@ -23,11 +23,11 @@ A "feature request" is a request for a new feature that will be added onto an ex
 
 
 ## Setup
-* set up MYSQL database
-* clone Repository containing the project `git@github.com:superirale/britecore-test.git`
-* cd project `cd britecore-test`
-* create a `.env` file from a sample `.env.sample` file and update the necessary variables
-* create a virtual environment `python -m venv britecore`
+* Set up MYSQL database
+* Clone Repository containing the project `git@github.com:superirale/britecore-test.git`
+* Navigate to the project directory `cd britecore-test`
+* Create a `.env` file from a sample `.env.sample` file and update the necessary variables
+* Create a virtual environment `python -m venv britecore`
 * Initialize the virtual environment `source britecore/bin/activate`
 * Execute `pip install -r requirements.txt` to install the project dependencies.
 * Run the migrations using `python manage.py db upgrade`
@@ -36,9 +36,9 @@ A "feature request" is a request for a new feature that will be added onto an ex
 Execute the following commands to run the app locally:
 
 ### Method 1
-* `export FLASK_ENV="development"`
-* `export FLASK_APP="run.py"`
-*  `flask run`
+* Execute command `export FLASK_ENV="development"` to set flask environment
+* Execute command `export FLASK_APP="run.py"` to set flask application entry point
+* Execute Command `flask run` to launch the app
 
 ### Method 2
 * you can simply use gunicorn to run the app `gunicorn --bind 0.0.0.0:5000 run:app`
@@ -49,7 +49,7 @@ You can also run the app using [uwsgi](https://uwsgi-docs.readthedocs.io/en/late
 ## Running the test
 From the commandline run the following commands
 
-* cd  `cd britecore-test`
+* Navigate to the project directory `cd britecore-test`
 * Initialize the virtual environment if it is not already initialized `. britecore/bin/activate`
 * then run `python app-test.py`
 
