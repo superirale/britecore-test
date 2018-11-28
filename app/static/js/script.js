@@ -72,6 +72,9 @@ $(document).ready(function () {
                     $("#addFeatureRequestForm :input").val("")
                     $("#FqId").text(data.id);
                     $("#addStatusMessage").show();
+                    setTimeout(function () {
+                        window.location = "/";
+                    }, 3000)
                 }
             })
         }

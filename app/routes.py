@@ -170,15 +170,18 @@ def update_feature_requests(id):
         feature_request.priority = int(request.form['priority'])
 
 
-        priority_to_update = feature_request.priority
+        priority_to_update = int(request.form['priority'])
         feat_requests_to_update_count = FeatureRequest.query.filter_by(client_id=feature_request.client_id, priority=priority_to_update).count()
+
         while feat_requests_to_update_count > 1:
             feat_requests_to_update = FeatureRequest.query.filter_by(client_id=feature_request.client_id, priority=priority_to_update).order_by('id').first()
             feat_requests_to_update.priority = feat_requests_to_update.priority + 1
             priority_to_update = priority_to_update + 1
             feat_requests_to_update_count = FeatureRequest.query.filter_by(client_id=feature_request.client_id, priority=priority_to_update).count()
 
+
         db.session.commit()
+
         response = jsonify({
             'id': feature_request.id,
             'title': feature_request.title,
