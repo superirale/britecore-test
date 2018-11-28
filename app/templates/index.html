@@ -5,21 +5,24 @@
         <div class="col-md">
             <div class="features">
                 <div class="actions">
-                    <a href="/features/create" class="btn btn-sm btn-success">Add feature</a>
+                    <a href="/feature-requests/create" class="btn btn-sm btn-success">Add feature</a>
                 </div>
                 <div class="">
-                    <div class="alert alert-danger" id="deleteAlertMesage"> Feature request removed!</div>
+                    <div class="alert alert-danger" id="deleteAlertMesage"> Feature request removed! (ID: <span></span>)</div>
                 </div>
                 <div class="features-inner" >
                     <table id="feature-req-table" class="display" style="width:100%">
                         <thead>
-                            <th>Id</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Client</th>
-                            <th>Priority</th>
-                            <th>Product Area</th>
-                            <th>Target Date</th>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Client</th>
+                                <th>Priority</th>
+                                <th>Product Area</th>
+                                <th>Target Date</th>
+                                <th>Actions</th>
+                            </tr>
                         </thead>
                     </table>
                 </div>
@@ -27,49 +30,5 @@
         </div>
     </div>
 </div>
-     <script>
-
-
-
-        function removeFeatureRequest  () {
-            $.ajax({
-                type: 'DELETE',
-                dataType: "text/plain",
-                url: 'api/feature-requests/' + this.Id(),
-                success: function (data, status) {
-                    if(status == '204') {
-                        $("#deleteAlertMesage").show();
-                    }
-                }
-            })
-
-        }
-
-
-        $(document).ready(function () {
-
-            $('#feature-req-table').DataTable({
-                "ajax": {
-                    "url": "/api/feature-requests",
-                    "dataSrc": function (json) {
-                        var return_data = new Array();
-                        for (var i = 0; i< json.length; i++) {
-                             return_data.push([
-                                json[i].id,
-                                json[i].title,
-                                json[i].description,
-                                json[i].client_id,
-                                json[i].priority,
-                                json[i].production_area_id,
-                                json[i].target_date
-                            ])
-                      }
-                      return return_data;
-                    }
-                }
-            });
-            $("#deleteAlertMesage").hide();
-        })
-    </script>
 
 {% endblock %}

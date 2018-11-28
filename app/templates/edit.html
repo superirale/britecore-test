@@ -5,24 +5,25 @@
         <div class="col-md">
             <div class="features">
                 <div class="alert alert-success" id="addStatusMessage">
-                    <p>Successfully added feature request (ID: <span id="FqId"></span>)</p>
+                    <p>Feature request successfully updated!</p>
                 </div>
-                <form class="form-horizontal" id="addFeatureRequestForm">
+                <h1>Edit Feature  Request (ID: {{feature_request.id}})</h1>
+                <form class="form-horizontal" id="updateFeatureRequestForm" data-id="{{feature_request.id}}">
                     <div class="form-group">
                         <label>Title</label>
-                        <input class="form-control" name="title" type="text" placeholder="Title" value="" required />
+                        <input class="form-control" name="title" type="text" placeholder="Title" required value="{{feature_request.title}}" />
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" name="description" rows="5" placeholder="Description"required ></textarea>
+                        <textarea class="form-control" name="description" rows="5" placeholder="Description"required >{{feature_request.description}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Priority</label>
-                        <input class="form-control" type="number" name="priority" min="1" placeholder="Priority" required />
+                        <input class="form-control" type="number" name="priority" min="1" placeholder="Priority" required value="{{feature_request.priority}}"/>
                     </div>
                     <div class="form-group">
                         <label>Target Date</label>
-                        <input class="form-control date-picker" type="text" name="target_date" placeholder="Target Date" required />
+                        <input class="form-control date-picker" id="editTargetDate" type="text" name="target_date" placeholder="Target Date" required value="{{feature_request.target_date}}"/>
                     </div>
                     <div class="form-group">
                        <label>
@@ -38,7 +39,7 @@
                         <select class="form-control" name="client_id" required>
                             <option value="">Select Client</option>
                             {% for client in clients %}
-                                <option value="{{client.id}}">{{client.name}}</option>
+                                <option value="{{client.id}}" {% if client.id == feature_request.client_id %} selected{% endif %}>{{client.name}}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -56,7 +57,7 @@
                         <select class="form-control" name="product_area_id" required>
                             <option value="">Select product area</option>
                             {% for item in product_areas %}
-                                <option value="{{item.id}}">{{item.name}}</option>
+                                <option value="{{item.id}}" {% if item.id == feature_request.product_area_id %} selected {% endif %}>{{item.name}}</option>
                             {% endfor %}
                         </select>
                     </div>

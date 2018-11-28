@@ -6,17 +6,20 @@ from app import app, db
 from pprint import pprint
 
 
-class BasicTestCase(unittest.TestCase):
+class RoutesTestCase(unittest.TestCase):
+    """unit test for all api the routes"""
 
-    def test_index(self):
-        """initial test. ensure flask was set up correctly"""
+    def test_index_page(self):
+        """unit test the index page route"""
         client = app.test_client(self)
         response = client.get('/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
 
-
-class RoutesTestCase(unittest.TestCase):
-    """unit test for all the routes"""
+    def test_creat_page(self):
+        """unit test the create feature page"""
+        client = app.test_client(self)
+        response = client.get('/feature-requests/create', content_type='html/text')
+        self.assertEqual(response.status_code, 200)
 
     def setUp(self):
         app.config.from_object(app_config["testing"])
@@ -27,8 +30,14 @@ class RoutesTestCase(unittest.TestCase):
                                 'description': 'the system should send email when an action is taken',
                                 'client_id': 1,
                                 'priority': 1,
-                                'production_area_id': 1,
+                                'product_area_id': 1,
                                 'target_date': '2018-11-26'}
+        self.update_feature_request = {'title': 'check notification',
+                                'description': 'the system should send email when an action is taken',
+                                'client_id': 1,
+                                'priority': 2,
+                                'product_area_id': 1,
+                                'target_date': '2018-12-07'}
         # binds the app to the current context
         with app.app_context():
             # create all tables
@@ -44,7 +53,7 @@ class RoutesTestCase(unittest.TestCase):
         self.assertIn('britecore', str(res.data))
 
     def test_api_can_get_all_clients(self):
-        """Test API can get a client (GET request)."""
+        """Test API can get all client (GET request)."""
         res = self.client.post('api/clients', data=self.client_data)
         self.assertEqual(res.status_code, 201)
         res = self.client.get('api/clients')
@@ -70,7 +79,7 @@ class RoutesTestCase(unittest.TestCase):
 
 
     def test_get_all_feature_request(self):
-        """Test API can create a feature request (POST request)"""
+        """Test API can get all feature request (POST request)"""
         res = self.client.post('api/clients', data=self.client_data)
         self.assertEqual(res.status_code, 201)
         res = self.client.post('api/production-areas', data=self.production_area)
@@ -83,8 +92,23 @@ class RoutesTestCase(unittest.TestCase):
         self.assertIn('Send email notification', str(res.data))
 
 
+    def test_feature_request_update(self):
+        """Test API can update a feature request (POST request)"""
+        res = self.client.post('api/clients', data=self.client_data)
+        self.assertEqual(res.status_code, 201)
+        res = self.client.post('api/production-areas', data=self.production_area)
+        self.assertEqual(res.status_code, 201)
+        res = self.client.post('api/feature-requests', data=self.feature_request)
+        self.assertEqual(res.status_code, 201)
+        data = json.loads(res.data.decode('utf-8').replace("'", "\""))
+        res = self.client.put('api/feature-requests/' + str(data['id']), data=self.update_feature_request)
+        self.assertEqual(res.status_code, 200)
+        self.assertIn('check notification', str(res.data))
+
+
+
     def test_feature_request_delete(self):
-        """Test API can create a feature request (POST request)"""
+        """Test API can delete a feature request (POST request)"""
         res = self.client.post('api/clients', data=self.client_data)
         self.assertEqual(res.status_code, 201)
         res = self.client.post('api/production-areas', data=self.production_area)
@@ -94,8 +118,6 @@ class RoutesTestCase(unittest.TestCase):
         data = json.loads(res.data.decode('utf-8').replace("'", "\""))
         res = self.client.delete('/api/feature-requests/' + str(data['id']))
         self.assertEqual(res.status_code, 204)
-
-
 
 
 
