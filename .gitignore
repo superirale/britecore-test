@@ -3,6 +3,9 @@ __pycache__
 app/__pycache__
 app/static/__pycache__
 app/templates/__pycache__
+app/*.pyc
 instance/__pycache__
+instance/*.pyc
 tasks.md
 britecore/
+*.pyc

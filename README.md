@@ -29,17 +29,22 @@ A "feature request" is a request for a new feature that will be added onto an ex
 * create a `.env` file from a sample `.env.sample` file and update the necessary variables
 * create a virtual environment `python -m venv britecore`
 * Initialize the virtual environment `source britecore/bin/activate`
-* Run `pip install -r requirements.txt` to install the project dependencies.
-* Run the migrations `python manage.py db upgrade`
+* Execute `pip install -r requirements.txt` to install the project dependencies.
+* Run the migrations using `python manage.py db upgrade`
 
 ## How to run
 Execute the following commands to run the app locally:
 
+## Method 1
 * `export FLASK_ENV="development"`
 * `export FLASK_APP="run.py"`
 *  `flask run`
 
-You can also run the app using [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) and [gunicorn](https://gunicorn.org/) (check their documentation for usage).
+## Method 2
+* you can simply use gunicorn to run the app `gunicorn --bind 0.0.0.0:5000 run:app`
+
+
+You can also run the app using [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) (check their documentation for usage).
 
 ## Running the test
 From the commandline run the following commands
