@@ -45,7 +45,7 @@ Execute the following commands to run the app locally:
 ### Method 2
 You can simply use gunicorn to run the app `gunicorn --bind 0.0.0.0:5000 run:app`, you can also run the app using [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) (check their documentation for usage).
 
-#### Note: The live demo can be found [here](http://217.69.6.212/) running on ubuntu 18.04 served using gunicorn and Nginx.
+#### Note: The live demo can be found [here](http://217.69.6.212/) running on ubuntu 18.04 served using Gunicorn and Nginx.
 
 ## Running the test
 From the commandline run the following commands
