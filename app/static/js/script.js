@@ -43,7 +43,9 @@ $(document).ready(function () {
     $("#deleteAlertMesage").hide();
 
 
-    var form = $( "#addFeatureRequestForm")
+    var form = $( "#addFeatureRequestForm");
+    form.validate();
+
     $('.date-picker').datepicker({
         format: 'yyyy-mm-dd',
         startDate: '1d'
@@ -52,7 +54,6 @@ $(document).ready(function () {
     $("#addClient").hide();
     $("#addProductArea").hide();
     $("#addStatusMessage").hide();
-    form.validate()
 
     form.submit(function(e) {
         e.preventDefault();
@@ -93,7 +94,6 @@ $(document).ready(function () {
             $("#showClient").show();
             $("#addClient").hide();
             $("#addClient :input").val("");
-
        }
     })
 
@@ -111,13 +111,15 @@ $(document).ready(function () {
             $("#addProductArea :input").val("");
        }
     })
-    // edit page date input format
+
     var dateValue = $("#editTargetDate").val();
     dateValue = moment(dateValue).format('YYYY-MM-DD');
+
     $("#editTargetDate").val(dateValue);
 
     var updateForm = $("#updateFeatureRequestForm");
-    updateForm.validate()
+    updateForm.validate();
+
     updateForm.submit(function(e) {
         e.preventDefault();
         if(updateForm.valid()) {
@@ -140,5 +142,4 @@ $(document).ready(function () {
             })
         }
     })
-})
-
+});
