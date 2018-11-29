@@ -23,7 +23,7 @@ A "feature request" is a request for a new feature that will be added onto an ex
 
 
 ## Setup
-* Set up MYSQL database
+* Set up MYSQL database (create two database demo and test)
 * Clone Repository containing the project `git@github.com:superirale/britecore-test.git`
 * Navigate to the project directory `cd britecore-test`
 * Create a `.env` file from a sample `.env.sample` file and update the necessary variables
