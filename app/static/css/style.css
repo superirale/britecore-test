@@ -32,3 +32,6 @@ label.error {
     margin: 0;
 }
 
+#addStatusMessage, #deleteAlertMesage {
+    display: none;
+}
